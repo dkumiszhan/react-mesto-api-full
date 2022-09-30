@@ -1,0 +1,10 @@
+.elements__list-item {
+  background-color: #ffffff;
+  width: 282px;
+  min-width: 282px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 10px;
+  position: relative;
+}

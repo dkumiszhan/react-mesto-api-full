@@ -1,0 +1,18 @@
+.profile__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 1;
+  transition: opacity 0.8s linear;
+
+}
+
+.profile__avatar:hover {
+  position: relative;
+  z-index: 2;
+  background-image: url('../../../images/pen.svg');
+  opacity: 0.6;
+  transition: opacity 0.8s linear;
+  cursor: pointer;
+}

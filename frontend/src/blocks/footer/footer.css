@@ -1,0 +1,13 @@
+.footer {
+  width: 68.75%;
+  margin: 67px auto 60px;
+  color: #545454;
+  position: relative;
+}
+
+@media (max-width: 760px) {
+  .footer {
+    margin: 53px 19px 36px 19px;
+    min-width: 282px;
+  }
+}

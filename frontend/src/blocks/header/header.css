@@ -1,0 +1,19 @@
+.header {
+  position: relative;
+  width: 68.75%;
+  margin: 45px auto 36px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+}
+
+@media (max-width: 760px) {
+  .header {
+    width: 100%;
+    margin-top: 28px;
+    margin-bottom: 38.25px;
+
+  }
+}

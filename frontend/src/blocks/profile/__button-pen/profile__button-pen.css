@@ -1,0 +1,26 @@
+.profile__button-pen {
+  background-image: url('../../../images/pen.svg');
+  background-color: #000000;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-area: pen;
+  opacity: 1;
+  transition: opacity 0.8s linear;
+} 
+
+.profile__button-pen:hover {
+  opacity: 0.6;
+  transition: opacity 0.8s linear;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .profile__button-pen {
+    width: 18px;
+    height: 18px;
+  }
+}

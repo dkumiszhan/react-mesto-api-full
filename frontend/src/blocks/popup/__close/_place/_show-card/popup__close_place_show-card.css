@@ -1,0 +1,11 @@
+.popup__close_place_show-card {
+  left: calc(100% + 8px);
+  top: -8px;
+}
+
+@media (max-width: 760px) {
+    .popup__close_place_show-card {
+      top: -14px;
+      left:calc(100% - 20px);
+    }
+  }

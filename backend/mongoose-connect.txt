@@ -1,0 +1,4 @@
+mongoose.connect('mongodb://root:root_password@localhost:27017/mestodb?authSource=admin', {
+  useNewUrlParser: true,
+  useUnifiedTopology: false,
+});

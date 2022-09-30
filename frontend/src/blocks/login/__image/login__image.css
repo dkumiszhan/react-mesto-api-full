@@ -1,0 +1,7 @@
+.login__image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    align-self: center;
+    margin-top: 28px;
+}
