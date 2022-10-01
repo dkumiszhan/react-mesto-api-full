@@ -20,8 +20,6 @@ function App() {
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [isRegisteredSuccess, setIsRegisteredSuccess] = useState(false);
-  // const [isRegisteredError, setIsRegisteredError] = useState(false);
   const [message, setMessage] = useState("");
   const history = useHistory();
 
@@ -52,24 +50,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // console.log(isLoggedIn);
     if (isLoggedIn) {
       history.push("/");
     }
   }, [isLoggedIn]);
 
   const onLogin = (data) => {
-    // console.log("onLogin");
     return apiAuth
       .authorize(data)
       .then((jwt) => {
         console.log('data is ', data);
-        //setUserInfo({ email, password });
         setUserInfo({ email: data.email });
         setIsLoggedIn(true);
         localStorage.setItem("jwt", jwt.token);
-        // console.log(jwt);
-        // history.push("/");
         return jwt;
       })
       .then(() => updateCurrentUser())
@@ -80,34 +73,24 @@ function App() {
   };
 
   const onLogout = (data) => {
-    // console.log("onLogout");
     setIsLoggedIn(false);
     localStorage.removeItem("jwt");
     history.push("/sign-in");
   };
 
   const onRegister = (data) => {
-    // console.log("onRegister");
     return apiAuth
       .register(data)
       .then(() => {
-        // history.push("/sign-in");
         setIsInfoTooltipOpen(true);
-        // setIsRegisteredSuccess(true);
         setMessage("Вы успешно зарегистрировались!");
         setInfoPopupImage(successImage);
         setInfoPopupImageName("Рисунок успешной регистрации");
-        // infoPopupImage = { successImage };
         console.log(infoPopupImage);
-        // infoPopupImageName = "Рисунок успешной регистрации";
       })
       .catch(() => {
         setIsInfoTooltipOpen(true);
-        // setIsRegisteredError(true);
         setMessage("Что-то пошло не так! Попробуйте ещё раз.");
-        //infoPopupImage = { errorImage };
-
-        //infoPopupImageName = "Рисунок неудачной регистрации";
         setInfoPopupImage(errorImage);
         setInfoPopupImageName("Рисунок неудачной регистрации");
       });
@@ -148,8 +131,6 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    // console.log("card deleted");
-    // const isOwn = card.owner._id === currentUser._id;
 
     api
       .deleteCard(card._id)
@@ -173,50 +154,14 @@ function App() {
         console.log(err);
       });
   }
-  // React.useEffect(() => {
-  //   api
-  //     .getInitialCards()
-  //     .then((cards) => {
-  //       console.log(cards);
-  //       setCards(cards);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-  // end of main js
-
-  // React.useEffect(() => {
-  //   api
-  //     .getUserInfo()
-  //     .then((res) => {
-  //       console.log('this is user ', res);
-  //       //console.log(res.name);
-  //       setCurrentUser(res);
-  //       //console.log(currentUser);
-  //       // console.log(typeof res);
-  //       // setUserName(res.name);
-  //       // setUserDescription(res.about);
-  //       // setUserAvatar(res.avatar);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
 
   function updateCurrentUser() {
     api
       .getUserInfo()
       .then((res) => {
         console.log('this is user ', res);
-        //console.log(res.name);
         setCurrentUser(res);
         return res;
-        //console.log(currentUser);
-        // console.log(typeof res);
-        // setUserName(res.name);
-        // setUserDescription(res.about);
-        // setUserAvatar(res.avatar);
       })
       .catch((err) => {
         console.log(err);
@@ -224,31 +169,19 @@ function App() {
   }
 
   function handleCardClick(card) {
-    // console.log("card clicked");
-    // console.log(card);
     setSelectedCard(card);
   }
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
-    // const popupEditAvatar = document.querySelector(".popup_place_edit-avatar");
-    // popupEditAvatar.classList.add("popup_is-opened");
   }
 
   function handleEditProfileClick() {
-    // console.log(true);
-
     setIsEditProfilePopupOpen(true);
-
-    // const popupEditProfile = document.querySelector(".popup_place_profile");
-    // popupEditProfile.classList.add("popup_is-opened");
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
-
-    // const popupAddPlace = document.querySelector(".popup_place_add-card");
-    // popupAddPlace.classList.add("popup_is-opened");
   }
 
   function closeAllPopups() {
@@ -264,10 +197,6 @@ function App() {
     setSelectedCard(null);
     if (isInfoTooltipOpen) {
       setIsInfoTooltipOpen(false);
-      // setIsRegisteredSuccess(false);
-      // setIsRegisteredError(false);
-      // console.log("set isInfoTooltipOpen to false ");
-      // console.log(isInfoTooltipOpen);
     }
   }
 
@@ -293,14 +222,12 @@ function App() {
   }, [isOpen]);
 
   function handleUpdateUser(data) {
-    //console.log("updating user");
     return api
       .setUserInfo({
         name: data.name,
         about: data.about,
       })
       .then((state) => {
-        //console.log(state);
         setCurrentUser(state);
         closeAllPopups();
       })
@@ -310,9 +237,6 @@ function App() {
   }
 
   function handleUpdateAvatar(data) {
-    //console.log("updating avatar");
-    //console.log("this is data");
-    //console.log(data.avatar);
     return api
       .setUserAvatar({
         avatar: data.avatar,
@@ -327,8 +251,6 @@ function App() {
   }
 
   function handleAddPlaceSubmit(data) {
-    //console.log("handle add place submit");
-    //console.log(data);
     return api
       .addCard(data)
       .then((newCard) => {
@@ -348,7 +270,6 @@ function App() {
         </Route>
         <Route path="/sign-up">
           <Register onRegister={onRegister} />
-          {/* {isRegisteredSuccess && ( */}
           <InfoTooltip
             message={message}
             infoImage={infoPopupImage}

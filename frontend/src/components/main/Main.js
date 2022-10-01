@@ -36,9 +36,6 @@ function Main({
                 className="profile__pic"
                 src={editImage}
                 alt="картинка редактировать"
-                // src={userAvatar}
-                // alt="avatar"
-                // {`<%=require(${userAvatar})%>`}
               />
             </div>
           </button>

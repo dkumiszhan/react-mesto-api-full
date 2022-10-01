@@ -1,17 +1,12 @@
 import {
-  CurrentUserContext,
-  currentUser,
+  CurrentUserContext
 } from "../../contexts/CurrentUserContext";
 import React from "react";
 
 function Card(props) {
-  // console.log(props);
-  //props.likes[0]._id
   const currentUser = React.useContext(CurrentUserContext);
 
   const isOwn = props.card.owner === currentUser._id;
-  //const isOwn = props.likes[0]._id === currentUser._id;
-  //const isOwn = true;
 
   const cardDeleteButtonClassName = `elements__remove ${
     isOwn ? "" : "elements__remove_hidden"
@@ -22,17 +17,14 @@ function Card(props) {
     isLiked ? "elements__list-button_active" : ""
   }`;
   function handleClick() {
-    // card.onCardClick(card);
     props.onCardClick(props);
   }
 
   function handleLikeClick() {
-    // card.onCardClick(card);
     props.onCardLike(props.card);
   }
 
   function handleDeleteClick() {
-    // card.onCardClick(card);
     props.onCardDelete(props.card);
   }
 
@@ -51,9 +43,7 @@ function Card(props) {
       <img
         className="elements__list-image"
         src={props.link}
-        // src={card.link}
         onClick={handleClick}
-        // alt={card.name}
         alt={props.name}
       />
       <div className="elements__flex-container">

@@ -4,8 +4,7 @@ import Main from "../main/Main.js";
 import Footer from "../footer/Footer.js";
 import ImagePopup from "../imagePopup/ImagePopup";
 import {
-  CurrentUserContext,
-  currentUser,
+  CurrentUserContext
 } from "../../../src/contexts/CurrentUserContext";
 import EditProfilePopup from "../editProfilePopup/EditProfilePopup";
 import EditAvatarPopup from "../editAvatarPopup/EditAvatarPopup";

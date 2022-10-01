@@ -2,11 +2,6 @@ class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
-
-    // this._headers = {
-    //   "Content-type": "application/json",
-    //   authorization: this._token,
-    // };
   }
 
   changeLikeCardStatus(cardId, isLiked) {
@@ -15,10 +10,6 @@ class Api {
     }
     return this.deleteLike(cardId);
   }
-
-  // changeDeleteCardStatus(cardId) {
-  //   return this.deleteCard(cardId);
-  // }
 
   _getResponseData(res) {
     if (!res.ok) {
@@ -55,7 +46,6 @@ class Api {
   }
 
   deleteCard(cardId) {
-    //console.log(cardId);
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       headers: {
         ...this._headers,
@@ -88,15 +78,6 @@ class Api {
         name: data.name,
         about: data.about,
       }),
-      //   body: JSON.stringify({
-      //     //   this.getUserInfo()
-      //     //   .then((data) => {
-      //     //       name: data.name;
-      //     //       about: data.about:
-      //     //   })
-      //     name: "Marie Skłodowska Curie",
-      //     about: "Physicist and Chemist",
-      //   }),
     }).then((res) => {
       return this._getResponseData(res);
     });
@@ -108,9 +89,7 @@ class Api {
         ...this._headers,
         authorization: this._getAuthHeader(),
     },      method: "PUT",
-      //body: JSON.stringify(data),
     }).then((res) => {
-      //console.log(res);
       return this._getResponseData(res);
     });
   }
@@ -121,7 +100,6 @@ class Api {
         ...this._headers,
         authorization: this._getAuthHeader(),
     },      method: "DELETE",
-      //body: JSON.stringify(data),
     }).then((res) => {
       return this._getResponseData(res);
     });
