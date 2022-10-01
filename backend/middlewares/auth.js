@@ -14,7 +14,7 @@ function auth(req, res, next) {
   const token = authorization.replace('Bearer ', '');
   let payload;
   try {
-    payload = jwt.verify(token, 'some-secret-key');
+    payload = jwt.verify(token, process.env.JWT_SECRET);
   } catch (e) {
     next(new UnauthorizedError(UNAUTHORIZED_MSG));
     // return res.status(401).send({ message: 'Необходима авторизация' });
