@@ -15,7 +15,7 @@ const UNAUTHORIZED_MSG = 'Ошибка авторизации';
 const getUsers = async (req, res, next) => {
   try {
     const users = await User.find({});
-    res.send({ data: users });
+    res.send(users);
   } catch (e) {
     next(new InternalServerError(INTERNAL_SERVER_ERROR_MSG));
   }
@@ -28,7 +28,7 @@ const getUserById = async (req, res, next) => {
     if (!user) {
       next(new NotFoundError(NOT_FOUND_MSG));
     } else {
-      res.send({ data: user });
+      res.send(user);
     }
   } catch (e) {
     if (e.name === 'CastError') {
@@ -49,7 +49,7 @@ const createUser = async (req, res, next) => {
       name, about, avatar, email, password: passwordHash,
     });
 
-    res.send({ data: user });
+    res.send(user);
   } catch (e) {
     if (e.name === 'ValidationError') {
       next(new BadRequestError(BAD_REQUEST_MSG));
@@ -66,7 +66,7 @@ const createUser = async (req, res, next) => {
 const getUserInfo = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
-    res.send({ data: user });
+    res.send(user);
   } catch (e) {
     next(new InternalServerError(INTERNAL_SERVER_ERROR_MSG));
   }
@@ -85,7 +85,7 @@ const updateUserInfo = async (req, res, next) => {
     if (!updatedUser) {
       next(new NotFoundError(NOT_FOUND_MSG));
     } else {
-      res.send({ data: updatedUser });
+      res.send(updatedUser);
     }
   } catch (e) {
     if (e.name === 'ValidationError') {
@@ -108,7 +108,7 @@ const updateUserAvatar = async (req, res, next) => {
     if (!updatedUser) {
       next(new NotFoundError(NOT_FOUND_MSG));
     } else {
-      res.send({ data: updatedUser });
+      res.send(updatedUser);
     }
   } catch (e) {
     if (e.name === 'ValidationError') {

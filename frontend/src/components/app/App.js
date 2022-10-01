@@ -130,7 +130,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
 
-  //main js part
+  // main js part
   const [cards, setCards] = React.useState([]);
 
   function handleCardLike(card) {
@@ -149,7 +149,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    //console.log("card deleted");
+    // console.log("card deleted");
     // const isOwn = card.owner._id === currentUser._id;
 
     api
@@ -166,7 +166,7 @@ function App() {
     api
       .getInitialCards()
       .then((cards) => {
-        // console.log(cards);
+        console.log(cards);
         setCards(cards);
       })
       .catch((err) => {
@@ -179,6 +179,7 @@ function App() {
     api
       .getUserInfo()
       .then((res) => {
+        console.log(res);
         //console.log(res.name);
         setCurrentUser(res);
         //console.log(currentUser);

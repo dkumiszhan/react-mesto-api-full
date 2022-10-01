@@ -30,7 +30,11 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then((res) => {
+    },
+    
+    
+    
+    ).then((res) => {
       return this._getResponseData(res);
     });
   }
@@ -122,7 +126,7 @@ const api = new Api({
   baseUrl: "http://localhost:3000",
   headers: {
     "Content-type": "application/json",
-    authorization: "c1d97d50-899b-43cb-b95d-18fefc90a34b",
+    authorization: "Bearer " + localStorage.getItem("jwt"),
   },
 });
 

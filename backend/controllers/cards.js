@@ -12,7 +12,7 @@ const FORBIDDEN_MSG = 'Ошибка прав';
 const getCards = async (req, res, next) => {
   try {
     const cards = await Card.find({});
-    res.send({ data: cards });
+    res.send(cards);
   } catch (e) {
     next(new InternalServerError(INTERNAL_SERVER_ERROR_MSG));
   }
@@ -22,7 +22,7 @@ const createCard = async (req, res, next) => {
   try {
     const { name, link } = req.body;
     const card = await new Card({ name, link, owner: req.user._id }).save();
-    res.send({ data: card });
+    res.send(card);
   } catch (e) {
     if (e.name === 'ValidationError') {
       next(new BadRequestError(BAD_REQUEST_MSG));
@@ -39,7 +39,7 @@ const deleteCard = async (req, res, next) => {
       next(new NotFoundError(NOT_FOUND_MSG));
     } else if (cardToDelete.owner.toString() === req.user._id) {
       await cardToDelete.remove();
-      res.send({ data: cardToDelete });
+      res.send(cardToDelete);
       return;
     } else {
       next(new ForbiddenError(FORBIDDEN_MSG));
@@ -63,7 +63,7 @@ const putLike = async (req, res, next) => {
     if (!updatedCard) {
       next(new NotFoundError(NOT_FOUND_MSG));
     } else {
-      res.send({ data: updatedCard });
+      res.send(updatedCard);
     }
   } catch (e) {
     if (e.name === 'CastError') {
@@ -84,7 +84,7 @@ const deleteLike = async (req, res, next) => {
     if (!updatedCard) {
       next(new NotFoundError(NOT_FOUND_MSG));
     } else {
-      res.send({ data: updatedCard });
+      res.send(updatedCard);
     }
   } catch (e) {
     if (e.name === 'CastError') {
