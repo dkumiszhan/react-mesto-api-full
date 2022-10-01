@@ -32,9 +32,6 @@ function App() {
     apiAuth
       .getContent(jwt)
       .then((response) => {
-        console.log("apiAuth.getContent working");
-
-        console.log(`user email is ${response.email}`);
         setUserInfo({ email: response.email });
         setIsLoggedIn(true);
       })
@@ -59,7 +56,6 @@ function App() {
     return apiAuth
       .authorize(data)
       .then((jwt) => {
-        console.log('data is ', data);
         setUserInfo({ email: data.email });
         setIsLoggedIn(true);
         localStorage.setItem("jwt", jwt.token);
@@ -110,8 +106,6 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser._id);
-    console.log('here', isLiked);
-    console.log(card, currentUser._id);
 
     api
       .changeLikeCardStatus(card._id, !isLiked)
@@ -119,10 +113,7 @@ function App() {
         setCards((state) => 
         {
           const newState = state.map((c) => (c._id === card._id ? newCard : c));
-          console.log(state, newState);
           return newState;
-
-
       });
       })
       .catch((err) => {
@@ -146,7 +137,6 @@ function App() {
     api
       .getInitialCards()
       .then((cards) => {
-        console.log(cards);
         setCards(cards);
         return cards;
       })
@@ -159,7 +149,6 @@ function App() {
     api
       .getUserInfo()
       .then((res) => {
-        console.log('this is user ', res);
         setCurrentUser(res);
         return res;
       })

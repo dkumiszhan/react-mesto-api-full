@@ -28,7 +28,6 @@ class Api {
     
     
     ).then((res) => {
-      console.log('cards from getInitialCards ', res);
       return this._getResponseData(res);
     });
   }
@@ -63,7 +62,6 @@ class Api {
         ...this._headers,
         authorization: this._getAuthHeader(),
     }}).then((res) => {
-      console.log('user from getUserInfo ', res);
       return this._getResponseData(res);
     });
   }
