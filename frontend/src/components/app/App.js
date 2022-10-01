@@ -1,19 +1,6 @@
 import React, { useEffect, useState } from "react";
-import logo from "../../images/Vector.svg";
 import "./App.css";
-import Header from "../header/Header.js";
-import Main from "../main/Main.js";
-import Footer from "../footer/Footer.js";
-import PopupWithForm from "../popupWithForm/PopupWithForm";
-import ImagePopup from "../imagePopup/ImagePopup";
-import {
-  CurrentUserContext,
-  currentUser,
-} from "../../../src/contexts/CurrentUserContext";
 import api from "../../utils/Api.js";
-import EditProfilePopup from "../editProfilePopup/EditProfilePopup";
-import EditAvatarPopup from "../editAvatarPopup/EditAvatarPopup";
-import AddPlacePopup from "../addPlacePopup/AddPlacePopup";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import Login from "../login/Login";
 import Register from "../register/Register";
@@ -53,6 +40,8 @@ function App() {
         setUserInfo({ email: response.email });
         setIsLoggedIn(true);
       })
+      .then(() => updateCurrentUser())
+      .then(() => loadInitialCards())
       .catch((err) => {
         console.log(err);
       });
@@ -74,14 +63,17 @@ function App() {
     return apiAuth
       .authorize(data)
       .then((jwt) => {
-        // console.log(data);
+        console.log('data is ', data);
         //setUserInfo({ email, password });
         setUserInfo({ email: data.email });
         setIsLoggedIn(true);
         localStorage.setItem("jwt", jwt.token);
         // console.log(jwt);
-        //history.push("/");
+        // history.push("/");
+        return jwt;
       })
+      .then(() => updateCurrentUser())
+      .then(() => loadInitialCards())
       .catch((err) => {
         console.log(err);
       });
@@ -169,26 +161,57 @@ function App() {
       });
   }
 
-  React.useEffect(() => {
+  function loadInitialCards() {
     api
       .getInitialCards()
       .then((cards) => {
         console.log(cards);
         setCards(cards);
+        return cards;
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }
+  // React.useEffect(() => {
+  //   api
+  //     .getInitialCards()
+  //     .then((cards) => {
+  //       console.log(cards);
+  //       setCards(cards);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
   // end of main js
 
-  React.useEffect(() => {
+  // React.useEffect(() => {
+  //   api
+  //     .getUserInfo()
+  //     .then((res) => {
+  //       console.log('this is user ', res);
+  //       //console.log(res.name);
+  //       setCurrentUser(res);
+  //       //console.log(currentUser);
+  //       // console.log(typeof res);
+  //       // setUserName(res.name);
+  //       // setUserDescription(res.about);
+  //       // setUserAvatar(res.avatar);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
+  function updateCurrentUser() {
     api
       .getUserInfo()
       .then((res) => {
-        console.log(res);
+        console.log('this is user ', res);
         //console.log(res.name);
         setCurrentUser(res);
+        return res;
         //console.log(currentUser);
         // console.log(typeof res);
         // setUserName(res.name);
@@ -198,7 +221,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }
 
   function handleCardClick(card) {
     // console.log("card clicked");

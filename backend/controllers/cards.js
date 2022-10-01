@@ -11,7 +11,7 @@ const FORBIDDEN_MSG = 'Ошибка прав';
 
 const getCards = async (req, res, next) => {
   try {
-    const cards = await Card.find({});
+    const cards = await Card.find({}).sort('-createdAt');
     res.send(cards);
   } catch (e) {
     next(new InternalServerError(INTERNAL_SERVER_ERROR_MSG));

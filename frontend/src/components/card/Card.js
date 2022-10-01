@@ -9,7 +9,7 @@ function Card(props) {
   //props.likes[0]._id
   const currentUser = React.useContext(CurrentUserContext);
 
-  const isOwn = props.card.owner._id === currentUser._id;
+  const isOwn = props.card.owner === currentUser._id;
   //const isOwn = props.likes[0]._id === currentUser._id;
   //const isOwn = true;
 
