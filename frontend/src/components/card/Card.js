@@ -17,7 +17,7 @@ function Card(props) {
     isOwn ? "" : "elements__remove_hidden"
   }`;
 
-  const isLiked = props.likes.some((i) => i._id === currentUser._id);
+  const isLiked = props.likes.some((i) => i === currentUser._id);
   const cardLikeButtonClassName = `elements__list-button ${
     isLiked ? "elements__list-button_active" : ""
   }`;

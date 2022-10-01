@@ -49,8 +49,8 @@ function App() {
       .then((response) => {
         console.log("apiAuth.getContent working");
 
-        console.log(`user email is ${response.data.email}`);
-        setUserInfo({ email: response.data.email });
+        console.log(`user email is ${response.email}`);
+        setUserInfo({ email: response.email });
         setIsLoggedIn(true);
       })
       .catch((err) => {
@@ -134,14 +134,21 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
+    console.log('here', isLiked);
+    console.log(card, currentUser._id);
 
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
+        setCards((state) => 
+        {
+          const newState = state.map((c) => (c._id === card._id ? newCard : c));
+          console.log(state, newState);
+          return newState;
+
+
+      });
       })
       .catch((err) => {
         console.log(err);
