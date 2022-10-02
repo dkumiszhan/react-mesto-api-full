@@ -1,5 +1,6 @@
 class Api {
   constructor(options) {
+    console.log('base url is ' + options.baseUrl, options);
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
   }
@@ -120,8 +121,10 @@ class Api {
   }
 }
 
+console.log(process.env);
 const api = new Api({
-  baseUrl: "http://kumiszhan.students.nomoredomains.icu/api",
+  // baseUrl: "http://kumiszhan.students.nomoredomains.icu/api",
+  baseUrl: process.env.REACT_APP_BASE_URL_API,
   headers: {
     "Content-type": "application/json",
   },

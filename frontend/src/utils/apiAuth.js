@@ -1,4 +1,4 @@
-export const BASE_URL = "http://kumiszhan.students.nomoredomains.icu/api";
+export const BASE_URL = process.env.REACT_APP_BASE_URL_API;
 
 const checkResponse = (response) => {
   return response.ok

@@ -11,18 +11,17 @@ const errorHandler = require('./middlewares/errors/errors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
-// const PORT = 3000;
 const app = express();
 app.use(express.json());
 
-const whitelist = ['http://localhost:3001', 'kumiszhan.students.nomoredomains.icu'];
+const whitelist = [process.env.BASE_URL_API, process.env.BASE_URL_STATIC];
 const corsOptions = {
   origin: whitelist,
 };
 
 app.use(cors(corsOptions));
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: false,
 });
@@ -58,5 +57,7 @@ app.use(errors());
 app.use(errorHandler);
 
 app.listen(PORT, () => {
+  console.log(process.env);
+  console.log('whitelist is ', whitelist);
   console.log(`App listening on port ${PORT}`);
 });
