@@ -1,10 +1,7 @@
-import { useState, useEffect } from "react";
-import api from "../../utils/Api.js";
 import Card from "../card/Card.js";
 import editImage from "../../images/pen.svg";
 import {
   CurrentUserContext,
-  currentUser,
 } from "../../contexts/CurrentUserContext";
 import React from "react";
 
@@ -30,7 +27,7 @@ function Main({
           >
             <div
               className="profile__avatar-container"
-              style={{ backgroundImage: `url(${currentUser.avatar})` }}
+              style={{ backgroundImage: `url(${currentUser.avatar || ''})` }}
             >
               <img
                 className="profile__pic"
