@@ -14,12 +14,10 @@ const { PORT = 3000 } = process.env;
 const app = express();
 app.use(express.json());
 
-const BASE_URL_API = process.env.BASE_URL_API || 'http://localhost:3000';
-const BASE_URL_STATIC = process.env.BASE_URL_STATIC || 'http://localhost:3001';
-const whitelist = [BASE_URL_API, BASE_URL_STATIC];
+const CORS_WHITELIST = process.env.CORS_WHITELIST || 'http://localhost:3000 http://localhost:3001'
 
 const corsOptions = {
-  origin: whitelist,
+  origin: CORS_WHITELIST.split(' '),
 };
 
 app.use(cors(corsOptions));
