@@ -14,7 +14,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 app.use(express.json());
 
-const CORS_WHITELIST = process.env.CORS_WHITELIST || 'http://localhost:3000 http://localhost:3001'
+const CORS_WHITELIST = process.env.CORS_WHITELIST || 'http://localhost:3000 http://localhost:3001';
 
 const corsOptions = {
   origin: CORS_WHITELIST.split(' '),
