@@ -13,6 +13,7 @@ const CONFLICT_MSG = 'Email занят';
 const INTERNAL_SERVER_ERROR_MSG = 'Произошла ошибка на сервере';
 const NOT_FOUND_MSG = 'Пользователь не найден';
 const UNAUTHORIZED_MSG = 'Ошибка авторизации';
+const JWT_SECRET = process.env.JWT_SECRET || 'changeme';
 const getUsers = async (req, res, next) => {
   try {
     const users = await User.find({});
@@ -132,7 +133,7 @@ const login = async (req, res, next) => {
         next(new UnauthorizedError(UNAUTHORIZED_MSG));
         return;
       }
-      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
       res.send({ _id: user._id, token });
     }
   } catch (e) {

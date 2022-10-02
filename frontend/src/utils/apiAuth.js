@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.REACT_APP_BASE_URL_API;
+export const BASE_URL = process.env.REACT_APP_BASE_URL_API || 'http://localhost:3000';
 
 const checkResponse = (response) => {
   return response.ok

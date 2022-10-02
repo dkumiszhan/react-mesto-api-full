@@ -14,14 +14,17 @@ const { PORT = 3000 } = process.env;
 const app = express();
 app.use(express.json());
 
-const whitelist = [process.env.BASE_URL_API, process.env.BASE_URL_STATIC];
+const BASE_URL_API = process.env.BASE_URL_API || 'http://localhost:3000';
+const BASE_URL_STATIC = process.env.BASE_URL_STATIC || 'http://localhost:3001';
+const whitelist = [BASE_URL_API, BASE_URL_STATIC];
+
 const corsOptions = {
   origin: whitelist,
 };
 
 app.use(cors(corsOptions));
 
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useUnifiedTopology: false,
 });
@@ -57,7 +60,5 @@ app.use(errors());
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(process.env);
-  console.log('whitelist is ', whitelist);
   console.log(`App listening on port ${PORT}`);
 });
