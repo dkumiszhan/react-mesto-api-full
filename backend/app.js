@@ -15,15 +15,9 @@ const { PORT = 3000 } = process.env;
 const app = express();
 app.use(express.json());
 
-const whitelist = ['http://localhost:3001', 'http://example2.com'];
+const whitelist = ['http://localhost:3001', 'kumiszhan.students.nomoredomains.icu'];
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: whitelist,
 };
 
 app.use(cors(corsOptions));
