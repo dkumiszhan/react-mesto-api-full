@@ -7,8 +7,6 @@ function Login(props) {
     password: "",
   });
 
-  const [message, setMessage] = useState("");
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginData({
@@ -18,7 +16,6 @@ function Login(props) {
   };
 
   const handleSubmit = (e) => {
-    setMessage("");
     e.preventDefault();
     if (!loginData.email || !loginData.password) {
       return;

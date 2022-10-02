@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../header/Header";
-import PopupWithForm from "../popupWithForm/PopupWithForm";
 
 function Login(props) {
   const [registerData, setRegisterData] = useState({
     email: "",
     password: "",
   });
-
-  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,11 +17,9 @@ function Login(props) {
   };
 
   const handleSubmit = (e) => {
-    setMessage("");
     e.preventDefault();
 
     props.onRegister(registerData);
-    // .catch((err) => setMessage(err.message || "Что-то пошло не так"));
   };
 
   return (
@@ -35,8 +30,6 @@ function Login(props) {
         <form
           className="login__form"
           name="registerForm"
-          //   onSubmit={props.onSubmit}
-          //   name={props.name}
         >
           <fieldset className="popup__fieldset">
             <input
